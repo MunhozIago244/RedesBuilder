@@ -1,0 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Global Styles ──────────────────────────────────────────────────────── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #020617; /* slate-950 */
+  color: #f1f5f9;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────── */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.3);
+}
+
+/* ─── React Flow Overrides ───────────────────────────────────────────────── */
+
+.react-flow__node {
+  cursor: default;
+}
+
+.react-flow__node.selected {
+  /* Remover outline padrão do React Flow */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-flow__edge-path {
+  cursor: pointer;
+}
+
+/* ─── NetBuilder Handles — Pontos de Conexão Visíveis & Didáticos ────────── */
+
+.netbuilder-handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: #1e293b !important;
+  border: 2px solid rgba(34, 211, 238, 0.4) !important;
+  border-radius: 50% !important;
+  opacity: 0.5;
+  transition: all 0.2s ease !important;
+  z-index: 10 !important;
+}
+
+/* Hover no nó: revela os handles com ciano forte */
+.react-flow__node:hover .netbuilder-handle,
+.react-flow__node.selected .netbuilder-handle {
+  opacity: 1;
+  background: #0e7490 !important;
+  border-color: #22d3ee !important;
+  box-shadow:
+    0 0 8px rgba(34, 211, 238, 0.5),
+    0 0 20px rgba(34, 211, 238, 0.15) !important;
+}
+
+/* Hover direto no handle: destaque máximo, sem mover posição */
+.netbuilder-handle:hover {
+  opacity: 1 !important;
+  background: #22d3ee !important;
+  border-color: #67e8f9 !important;
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.7),
+    0 0 30px rgba(34, 211, 238, 0.3) !important;
+  cursor: crosshair !important;
+}
+
+/* Efeito direcional via box-shadow spread — NÃO altera transform */
+.netbuilder-handle-top:hover {
+  box-shadow:
+    0 -6px 12px rgba(34, 211, 238, 0.6),
+    0 -2px 20px rgba(34, 211, 238, 0.2) !important;
+}
+
+.netbuilder-handle-bottom:hover {
+  box-shadow:
+    0 6px 12px rgba(34, 211, 238, 0.6),
+    0 2px 20px rgba(34, 211, 238, 0.2) !important;
+}
+
+.netbuilder-handle-left:hover {
+  box-shadow:
+    -6px 0 12px rgba(34, 211, 238, 0.6),
+    -2px 0 20px rgba(34, 211, 238, 0.2) !important;
+}
+
+.netbuilder-handle-right:hover {
+  box-shadow:
+    6px 0 12px rgba(34, 211, 238, 0.6),
+    2px 0 20px rgba(34, 211, 238, 0.2) !important;
+}
+
+/* Enquanto arrasta conexão: todos os handles target brilham para guiar */
+.react-flow__handle.connecting {
+  opacity: 1 !important;
+  background: #22d3ee !important;
+  border-color: #67e8f9 !important;
+  animation: handlePulse 1s ease-in-out infinite !important;
+}
+
+@keyframes handlePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(34, 211, 238, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(34, 211, 238, 0.8),
+      0 0 30px rgba(34, 211, 238, 0.3);
+  }
+}
+
+.react-flow__handle {
+  transition: all 0.15s ease;
+}
+
+.react-flow__connection-line {
+  stroke: #22d3ee;
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+}
+
+.react-flow__minimap {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.react-flow__controls {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.react-flow__controls button {
+  border-radius: 8px !important;
+  margin: 2px !important;
+}
+
+.react-flow__controls button svg {
+  fill: #94a3b8 !important;
+}
+
+.react-flow__controls button:hover svg {
+  fill: #e2e8f0 !important;
+}
+
+/* Fix para o background do React Flow */
+.react-flow__background {
+  background-color: #020617 !important;
+}
+
+/* ─── Selection Box ──────────────────────────────────────────────────────── */
+
+.react-flow__selection {
+  background: rgba(34, 211, 238, 0.05) !important;
+  border: 1px solid rgba(34, 211, 238, 0.3) !important;
+  border-radius: 8px;
+}
+
+/* ─── Glass Morphism Utility ─────────────────────────────────────────────── */
+
+@layer components {
+  .glass-panel {
+    @apply bg-slate-900/70 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl;
+  }
+
+  .glass-panel-strong {
+    @apply bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl;
+  }
+
+  .glow-cyan {
+    box-shadow:
+      0 0 20px rgba(34, 211, 238, 0.15),
+      0 0 60px rgba(34, 211, 238, 0.05);
+  }
+
+  .glow-purple {
+    box-shadow:
+      0 0 20px rgba(168, 85, 247, 0.15),
+      0 0 60px rgba(168, 85, 247, 0.05);
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes packetPulse {
+  0%,
+  100% {
+    opacity: 1;
+    r: 5;
+  }
+  50% {
+    opacity: 0.7;
+    r: 7;
+  }
+}
+
+.packet-pulse {
+  animation: packetPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes packetTravel {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* ─── Screen Reader Only ──────────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Tooltip ────────────────────────────────────────────────────────────── */
+
+[title] {
+  position: relative;
+}
+
+/* ─── Focus Ring ─────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  ARCHITECTURE BUILDER — Handles & Nodes                                   */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Handle base */
+.archbuilder-handle {
+  width: 10px !important;
+  height: 10px !important;
+  border: 2px solid rgba(139, 92, 246, 0.6) !important;
+  background: rgba(15, 23, 42, 0.9) !important;
+  border-radius: 50% !important;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  z-index: 10;
+}
+
+/* Show handles on node hover or selection */
+.arch-node:hover .archbuilder-handle,
+.arch-node.selected .archbuilder-handle,
+.react-flow__node.selected .archbuilder-handle {
+  opacity: 1;
+}
+
+/* Handle hover glow */
+.archbuilder-handle:hover {
+  border-color: #a78bfa !important;
+  background: rgba(139, 92, 246, 0.3) !important;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+}
+
+/* Directional spreads (same technique as network handles) */
+.archbuilder-handle-top:hover {
+  box-shadow: 0 -6px 12px rgba(139, 92, 246, 0.4);
+}
+.archbuilder-handle-bottom:hover {
+  box-shadow: 0 6px 12px rgba(139, 92, 246, 0.4);
+}
+.archbuilder-handle-left:hover {
+  box-shadow: -6px 0 12px rgba(139, 92, 246, 0.4);
+}
+.archbuilder-handle-right:hover {
+  box-shadow: 6px 0 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Connecting state pulse */
+.react-flow__handle-connecting .archbuilder-handle {
+  opacity: 1;
+  animation: archHandlePulse 1s infinite;
+}
+
+@keyframes archHandlePulse {
+  0%,
+  100% {
+    border-color: rgba(139, 92, 246, 0.6);
+  }
+  50% {
+    border-color: rgba(167, 139, 250, 1);
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+  }
+}
+
+/* ── Inspector inputs ──────────────────────────────────────────────────────── */
+.inspector-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11px;
+  color: #e2e8f0;
+  transition: border-color 0.15s ease;
+}
+.inspector-input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.5);
+}
+.inspector-input::placeholder {
+  color: rgba(148, 163, 184, 0.3);
+}
