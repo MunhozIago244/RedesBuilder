@@ -1,0 +1,77 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependências (O MAIS IMPORTANTE)
+node_modules
+.pnpm-store
+
+# Build de Produção
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables (SEGURANÇA CRÍTICA)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel
+
+node_modules/
+
+# Outras pastas e arquivos desnecessários
+coverage/
+.turbo/
+.next/
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+*.tgz
+*.zip
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+*.swp
+*.swo
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Lockfiles alternativos
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Relatórios
+coverage*
+junit.xml
+test-results.xml
+*.lcov
+
+# Arquivos de sistema
+Icon?
+.Spotlight-V100
+.Trashes
+.fseventsd
